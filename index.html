@@ -1,58 +1,288 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>DIMA AI Offline</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DIMA AI Terminal - Offline</title>
 <style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 body{
-    background:#0f172a;
+    font-family:Segoe UI,Arial,sans-serif;
+    background:
+    radial-gradient(circle at top left,#1e3a8a,#0f172a 45%),
+    radial-gradient(circle at bottom right,#0ea5e9,#020617 60%);
+    min-height:100vh;
     color:white;
-    font-family:Arial;
-    text-align:center;
-    padding:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+.container{
+    max-width:1000px;
+    width:100%;
 }
 .card{
-    max-width:700px;
-    margin:auto;
-    background:#1e293b;
-    padding:25px;
-    border-radius:15px;
+    background:rgba(255,255,255,0.06);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:28px;
+    padding:35px;
+    box-shadow:0 15px 50px rgba(0,0,0,0.45);
+}
+.header{
+    text-align:center;
+}
+.header h1{
+    font-size:2.5rem;
+    margin-bottom:10px;
+}
+.subtitle{
+    color:#cbd5e1;
+}
+.server-status{
+    margin-top:25px;
+    text-align:center;
+}
+.dot{
+    width:12px;
+    height:12px;
+    background:#ef4444;
+    border-radius:50%;
+    display:inline-block;
+    margin-right:8px;
+    animation:pulse 1.3s infinite;
+}
+@keyframes pulse{
+    0%{opacity:1;}
+    50%{opacity:.3;}
+    100%{opacity:1;}
+}
+.clock{
+    margin-top:12px;
+    color:#93c5fd;
+    font-weight:bold;
+}
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-top:30px;
+}
+.stat{
+    background:rgba(255,255,255,0.05);
+    border-radius:16px;
+    padding:20px;
+    text-align:center;
+}
+.stat h2{
+    color:#38bdf8;
+}
+.section{
+    margin-top:35px;
+}
+.section h3{
+    color:#38bdf8;
+    margin-bottom:15px;
+}
+.section p{
+    line-height:1.8;
+    color:#dbeafe;
+}
+ul{
+    margin-top:15px;
+    padding-left:20px;
+}
+li{
+    margin-bottom:8px;
+    color:#dbeafe;
+}
+.quote{
+    margin-top:20px;
+    background:rgba(56,189,248,.08);
+    border-left:4px solid #38bdf8;
+    padding:20px;
+    border-radius:12px;
+    font-style:italic;
+}
+.tip-box{
+    margin-top:15px;
+    background:rgba(255,255,255,0.05);
+    padding:18px;
+    border-radius:12px;
+    min-height:70px;
+    display:flex;
+    align-items:center;
+}
+.buttons{
+    margin-top:35px;
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+}
+.btn{
+    text-decoration:none;
+    padding:14px 24px;
+    border-radius:12px;
+    font-weight:bold;
+    transition:.3s;
+}
+.btn-primary{
+    background:#38bdf8;
+    color:#000;
+}
+.btn-primary:hover{
+    transform:translateY(-2px);
+}
+.btn-secondary{
+    background:rgba(255,255,255,.08);
+    color:white;
+}
+.btn-secondary:hover{
+    background:rgba(255,255,255,.15);
+}
+.footer{
+    text-align:center;
+    margin-top:40px;
+    color:#94a3b8;
+    font-size:14px;
+}
+hr{
+    border:none;
+    height:1px;
+    background:rgba(255,255,255,.08);
+    margin:30px 0;
 }
 </style>
 </head>
 <body>
-
+<div class="container">
 <div class="card">
-
+<div class="header">
 <h1>🤖 DIMA AI TERMINAL</h1>
-
-<h2>Server Sedang Offline</h2>
-
-<p>
-Saat ini server analisa saham sedang tidak aktif.
+<p class="subtitle">
+Analisis Saham Berbasis AI & Fundamental Investing
+</p>
+</div>
+<div class="server-status">
+<h2>
+<span class="dot"></span>
+Server Sedang Offline
+</h2>
+<p style="margin-top:10px;color:#cbd5e1;">
+Server analisa saham saat ini sedang tidak aktif.
 Silakan kembali beberapa saat lagi.
 </p>
-
-<hr>
-
-<h3>📚 Tips Investasi</h3>
-
-<p>
-Jangan membeli saham hanya karena turun.
-Pastikan fundamental perusahaan tetap sehat.
-</p>
-
-<p>
-Margin of Safety membantu investor mengurangi risiko.
-</p>
-
-<hr>
-
-<p>
-🎥 YouTube Dimensi Afif
-</p>
-
+<div class="clock" id="clock"></div>
 </div>
-
+<div class="stats">
+<div class="stat">
+<h2>10+</h2>
+<p>Tahun Investasi</p>
+</div>
+<div class="stat">
+<h2>8.000+</h2>
+<p>Subscriber</p>
+</div>
+<div class="stat">
+<h2>5,3 Juta+</h2>
+<p>Total Views</p>
+</div>
+<div class="stat">
+<h2 id="investDays">0</h2>
+<p>Hari Perjalanan Investasi</p>
+</div>
+</div>
+<hr>
+<div class="section">
+<h3>📈 Filosofi Investasi DIMA</h3>
+<p>
+DIMA AI Terminal dibangun berdasarkan pengalaman investasi
+lebih dari satu dekade dengan pendekatan fundamental,
+jangka panjang, dan manajemen risiko.
+</p>
+<ul>
+<li>Fokus pada kualitas bisnis perusahaan</li>
+<li>Mengutamakan Margin of Safety</li>
+<li>Menambah jumlah lot secara bertahap</li>
+<li>Reinvestasi dividen</li>
+<li>Tidak mengejar saham hanya karena ramai</li>
+<li>Menghindari keputusan emosional</li>
+</ul>
+<div class="quote">
+"Harga saham bergerak setiap hari.
+Nilai perusahaan berubah jauh lebih lambat."
+<br><br>
+<b>— Afif | Dimensi Afif</b>
+</div>
+</div>
+<div class="section">
+<h3>💡 Tips Investasi Hari Ini</h3>
+<div class="tip-box" id="randomTip">
+Memuat tips...
+</div>
+</div>
+<div class="section">
+<h3>🚀 Tentang DIMA AI</h3>
+<p>
+DIMA AI Terminal merupakan proyek personal yang menggabungkan
+Artificial Intelligence, Screening Saham, Analisis Fundamental,
+Visualisasi Data, dan Edukasi Investasi untuk membantu investor
+mengambil keputusan yang lebih rasional berbasis data.
+</p>
+</div>
+<div class="buttons">
+<a href="https://youtube.com/@DimensiAfif"
+class="btn btn-primary">
+🎥 YouTube Dimensi Afif
+</a>
+<a href="https://dimaterminal.com"
+class="btn btn-secondary">
+🔄 Coba Lagi DIMA Terminal
+</a>
+</div>
+<div class="footer">
+<p><b>Dimensi Afif © 2026</b></p>
+<p>
+Belajar Investasi dengan Pendekatan Fundamental dan AI
+</p>
+</div>
+</div>
+</div>
+<script>
+function updateClock(){
+const now = new Date();
+document.getElementById("clock").innerHTML =
+"🕒 " + now.toLocaleString("id-ID");
+}
+setInterval(updateClock,1000);
+updateClock();
+const tips = [
+"Jangan membeli saham hanya karena harganya turun.",
+"Pastikan memahami bisnis perusahaan sebelum membeli sahamnya.",
+"Dividen yang diinvestasikan kembali dapat mempercepat pertumbuhan portofolio.",
+"Margin of Safety membantu mengurangi risiko investasi.",
+"Kesabaran sering kali lebih penting daripada prediksi pasar.",
+"Fokus pada kualitas perusahaan, bukan kebisingan pasar.",
+"Jangan gunakan uang kebutuhan sehari-hari untuk investasi saham.",
+"Investor sukses berpikir dalam hitungan tahun, bukan hari."
+];
+const random =
+tips[Math.floor(Math.random()*tips.length)];
+document.getElementById("randomTip").innerHTML =
+random;
+const startInvest =
+new Date("2015-01-01");
+const today =
+new Date();
+const diff =
+Math.floor((today-startInvest)/(1000*60*60*24));
+document.getElementById("investDays").innerHTML =
+diff.toLocaleString("id-ID");
+</script>
 </body>
 </html>
