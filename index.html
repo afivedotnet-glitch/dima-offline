@@ -117,6 +117,45 @@ li{
     min-height:70px;
     display:flex;
     align-items:center;
+
+
+.info-card{
+    margin-top:15px;
+    background:rgba(255,255,255,0.05);
+    border-radius:16px;
+    padding:22px;
+    border-left:4px solid #38bdf8;
+    transition:.3s;
+}
+
+.info-card:hover{
+    background:rgba(255,255,255,0.08);
+}
+
+.info-card h4{
+    color:#38bdf8;
+    margin-bottom:10px;
+    font-size:1.05rem;
+}
+
+.info-card p{
+    color:#dbeafe;
+    line-height:1.8;
+}
+
+.reflection-card{
+    margin-top:15px;
+    background:rgba(56,189,248,.08);
+    border-radius:16px;
+    padding:25px;
+    text-align:center;
+    font-size:1.05rem;
+    font-style:italic;
+}
+    
+    
+
+    
 }
 .buttons{
     margin-top:35px;
@@ -226,6 +265,35 @@ Nilai perusahaan berubah jauh lebih lambat."
 Memuat tips...
 </div>
 </div>
+
+<div class="section">
+<h3>📚 Istilah Investasi Hari Ini</h3>
+
+<div class="info-card">
+<h4 id="termTitle">Memuat...</h4>
+<p id="termDescription"></p>
+</div>
+</div>
+
+<div class="section">
+<h3>📅 Hari Ini Dalam Sejarah Investasi</h3>
+
+<div class="info-card">
+<p id="historyToday">
+Memuat sejarah...
+</p>
+</div>
+</div>
+
+<div class="section">
+<h3>🤔 Pertanyaan Refleksi Investor</h3>
+
+<div class="reflection-card" id="reflectionQuestion">
+Memuat pertanyaan...
+</div>
+</div>
+    
+    
 <div class="section">
 <h3>🚀 Tentang DIMA AI</h3>
 <p>
@@ -283,6 +351,86 @@ const diff =
 Math.floor((today-startInvest)/(1000*60*60*24));
 document.getElementById("investDays").innerHTML =
 diff.toLocaleString("id-ID");
+
+const terms = [
+{
+title:"Margin of Safety",
+desc:"Selisih antara nilai intrinsik perusahaan dengan harga pasar yang memberikan bantalan keamanan bagi investor."
+},
+{
+title:"ROE (Return on Equity)",
+desc:"Mengukur seberapa efektif perusahaan menghasilkan laba dari modal pemegang saham."
+},
+{
+title:"Free Cash Flow",
+desc:"Kas yang tersisa setelah perusahaan membiayai operasional dan belanja modal."
+},
+{
+title:"Dividend Yield",
+desc:"Persentase dividen tahunan dibandingkan harga saham saat ini."
+},
+{
+title:"Moat",
+desc:"Keunggulan kompetitif yang membuat perusahaan sulit disaingi oleh kompetitor."
+},
+{
+title:"PER (Price Earnings Ratio)",
+desc:"Rasio yang menunjukkan berapa kali investor membayar laba perusahaan."
+},
+{
+title:"PBV (Price to Book Value)",
+desc:"Perbandingan harga saham terhadap nilai buku perusahaan."
+},
+{
+title:"Net Profit Margin",
+desc:"Persentase laba bersih dibandingkan total pendapatan perusahaan."
+}
+];
+
+const randomTerm =
+terms[Math.floor(Math.random()*terms.length)];
+
+document.getElementById("termTitle").innerHTML =
+randomTerm.title;
+
+document.getElementById("termDescription").innerHTML =
+randomTerm.desc;
+
+
+const histories = [
+"1929 - Pasar saham Amerika Serikat mengalami kejatuhan besar yang kemudian dikenal sebagai Great Depression.",
+"1934 - Benjamin Graham mulai memperkenalkan pendekatan Value Investing modern.",
+"1965 - Warren Buffett mengambil alih Berkshire Hathaway.",
+"1976 - John C. Bogle mendirikan Vanguard dan mempopulerkan investasi indeks.",
+"1987 - Black Monday menyebabkan pasar saham global jatuh tajam.",
+"2008 - Krisis keuangan global mengguncang pasar modal dunia.",
+"2020 - Pandemi COVID-19 menyebabkan volatilitas ekstrem di pasar saham."
+];
+
+const randomHistory =
+histories[Math.floor(Math.random()*histories.length)];
+
+document.getElementById("historyToday").innerHTML =
+randomHistory;
+
+
+const reflections = [
+"Jika harga saham turun 30% besok, apakah Anda masih yakin dengan bisnis yang Anda miliki?",
+"Apakah Anda membeli saham berdasarkan analisis atau karena mengikuti orang lain?",
+"Jika pasar tutup selama lima tahun, apakah Anda tetap nyaman memiliki saham Anda saat ini?",
+"Apakah portofolio Anda sudah cukup terdiversifikasi?",
+"Apakah Anda benar-benar memahami model bisnis perusahaan yang Anda beli?",
+"Apakah Anda siap memegang saham ini ketika pasar sedang pesimis?",
+"Apakah keputusan investasi Anda didasarkan pada data atau emosi?"
+];
+
+const randomReflection =
+reflections[Math.floor(Math.random()*reflections.length)];
+
+document.getElementById("reflectionQuestion").innerHTML =
+randomReflection;
+    
+    
 </script>
 </body>
 </html>
