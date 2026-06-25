@@ -208,11 +208,12 @@ Analisis Saham Berbasis AI & Fundamental Investing
 </p>
 </div>
 <div class="server-status">
-<h2>
+<h2 id="serverText">
 <span class="dot"></span>
 Server Sedang Offline
 </h2>
-<p style="margin-top:10px;color:#cbd5e1;">
+<p id="serverDesc"
+style="margin-top:10px;color:#cbd5e1;">
 Server analisa saham saat ini sedang tidak aktif.
 Silakan kembali beberapa saat lagi.
 </p>
@@ -429,7 +430,39 @@ reflections[Math.floor(Math.random()*reflections.length)];
 
 document.getElementById("reflectionQuestion").innerHTML =
 randomReflection;
-    
+
+async function checkServer() {
+
+    try {
+
+        const response = await fetch(
+            "https://dimaterminal.com/health?t=" + Date.now(),
+            {
+                cache: "no-store"
+            }
+        );
+
+        if (response.ok) {
+
+            document.getElementById("serverText").innerHTML =
+                '<span class="dot" style="background:#22c55e"></span>Server Sedang Online';
+
+            document.getElementById("serverDesc").innerHTML =
+                'DIMA AI Terminal telah aktif kembali. Mengalihkan...';
+
+            setTimeout(() => {
+                window.location.href =
+                    "https://dimaterminal.com";
+            }, 3000);
+        }
+
+    } catch (e) {
+        console.log("Server masih offline");
+    }
+}
+
+checkServer();
+setInterval(checkServer, 30000);
     
 </script>
 </body>
